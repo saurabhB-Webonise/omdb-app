@@ -5,26 +5,32 @@ import {
   Text,
   StyleSheet,
   Platform,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  ImageBackground
 } from 'react-native';
 
 const MovieGridTile = props => {
-  let TouchableCmp = TouchableOpacity;
 
+  let TouchableCmp = TouchableOpacity;
   if (Platform.OS === 'android' && Platform.Version >= 21) {
     TouchableCmp = TouchableNativeFeedback;
   }
-  return (
-    <View style={styles.gridItem}>
+
+  return <View style={styles.gridItem}>
+    <ImageBackground
+      source={{ uri: props.Poster }}
+      style={styles.bgImage}>
       <TouchableCmp style={{ flex: 1 }} onPress={props.onSelect}>
-        <View style={{ ...styles.container, ...{ backgroundColor: props.color } }}>
-          <Text style={styles.title} numberOfLines={2}>
-            {props.title}
-          </Text>
+        <View style={{ ...styles.container, ...props.style }}>
+          <View style={styles.innerContainer}>
+            <Text style={styles.title} numberOfLines={2}>
+              {props.title}
+            </Text>
+          </View>
         </View>
       </TouchableCmp>
-    </View>
-  );
+    </ImageBackground>
+  </View>
 };
 
 const styles = StyleSheet.create({
@@ -42,15 +48,28 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.26,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 10,
-    elevation: 3,
-    padding: 15,
     justifyContent: 'flex-end',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+  },
+  innerContainer: {
+    backgroundColor: 'rgba(0,0,0,1)',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    padding: 10
   },
   title: {
-    fontSize: 22,
+    fontSize: 15,
     textAlign: 'right',
-    color:'white'
+    color: 'white',
+    fontFamily: 'open-sans'
+  },
+  bgImage: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'flex-end',
+    opacity: 0.7
   }
 });
 

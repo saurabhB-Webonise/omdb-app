@@ -7,8 +7,9 @@ const GridList = props => {
     const renderGridItem = itemData => {
         return (
             <MovieGridTile
-                title={itemData.item.title}
-                color={Colors.primary}
+                title={itemData.item.Title}
+                Poster={itemData.item.Poster}
+                
                 onSelect={props.onSelect.bind(this, itemData)}
             />
         );

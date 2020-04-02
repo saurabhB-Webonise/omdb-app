@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     View,
     Text,
@@ -7,37 +7,58 @@ import {
 } from 'react-native';
 
 
-import MOVIE_NAME from '../data/dummy-data';
-import  Colors  from '../constants/color';
+import { useSelector, useDispatch } from 'react-redux';
+import Colors from '../constants/color';
+
 
 const DetailScreen = props => {
+
+    const MovieList = useSelector(state => state.movies.availableSearchedMovie)
     const id = props.navigation.getParam('movieId');
-    console.log(id)
-    // const movie = MOVIE_NAME.find(movie => movie.id === id)
+    const moviess = MovieList.find(movie => movie.id === id)
+  return <View style={{ height: '100%', padding: 10, backgroundColor: Colors.accent }}>
+         <View style={styles.mealItem}>
+             <View>
+                 <View style={{ ...styles.mealRow, ...styles.mealHeader }}>
+                     <ImageBackground
+                         source={{ uri: moviess.Poster }}
+                         style={styles.bgImage}>
+                         <View style={styles.titleContainer}>
+                             <Text style={styles.title} numberOfLines={1}>
+                                 {moviess.Title}
+                             </Text>
+                         </View>
+                     </ImageBackground>
+                 </View>
+                 <View style={{ ...styles.mealRow, ...styles.mealDetail }}>
+                     <Text>Movie Name</Text>
+                     <Text>rating</Text>
+                 </View>
+             </View>
+         </View>
+     </View>
 
-    return <View style={{ height:'100%',padding: 10 ,backgroundColor:Colors.accent}}>
-        <View style={styles.mealItem}>
-            <View>
-                <View style={{ ...styles.mealRow, ...styles.mealHeader }}>
-                    <ImageBackground
-                        source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg/800px-Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg' }}
-                        style={styles.bgImage}>
-                        <View style={styles.titleContainer}>
-                            <Text style={styles.title} numberOfLines={1}>
-                                {}
-
-                            </Text>
-                        </View>
-                    </ImageBackground>
-                </View>
-                <View style={{ ...styles.mealRow, ...styles.mealDetail }}>
-                    <Text>Movie Name</Text>
-                    <Text>rating</Text>
-                </View>
-            </View>
-        </View>
-    </View>
 };
+
+
+
+
+
+// const GetMoviesFromApi = () => {
+
+//     fetch('http://www.omdbapi.com/?apikey=ea9dc777&t=' + movie.Title)
+//         .then((response) => response.json())
+//         .then((json) => {
+//             console.log(json)
+//             console.log("------------------------------start--------------------------------------")
+
+//             Jsonn = json
+//             return <ViewUI />
+
+//         }).catch((error) => {
+//             console.error(error);
+//         });
+// };
 
 
 

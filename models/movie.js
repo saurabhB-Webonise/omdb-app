@@ -1,5 +1,8 @@
 class Movie {
    
+
+
+
    
     constructor(id, title, color) {
         this.id = id;
@@ -9,3 +12,5 @@ class Movie {
     
 }
 export default Movie;
+
+

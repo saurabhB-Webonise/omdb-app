@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import *  as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import OmdbNavigator from './navigation/OmdbNavigator'
+
+
+
+import movieReducer from './store/reducers/movies';
+import { enableScreens } from 'react-native-screens';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
+
+enableScreens();
+const rootReducer = combineReducers({
+  movies: movieReducer
+});
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -13,19 +26,12 @@ const fetchFonts = () => {
 
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false)
-  if (fontLoaded) {
+  if (!fontLoaded) {
     return <AppLoading
       startAsync={fetchFonts}
-      onFinish={setFontLoaded(true)} />
+      onFinish={()=>setFontLoaded(true)} />
   }
-  return (<OmdbNavigator />);
+  return <Provider store={store}>
+    <OmdbNavigator />
+  </Provider>;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
