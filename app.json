@@ -1,6 +1,9 @@
 {
   "expo": {
     "name": "Blank Template",
+    "android": {
+      "package": "com.example.omdb"
+    },
     "slug": "omdb-app",
     "privacy": "public",
     "sdkVersion": "36.0.0",
@@ -26,5 +29,6 @@
     "ios": {
       "supportsTablet": true
     }
-  }
+  },
+  
 }
