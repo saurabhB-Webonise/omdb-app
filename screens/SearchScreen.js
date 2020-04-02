@@ -73,8 +73,7 @@ const Styles = StyleSheet.create({
     },
     searchbox: {
         margin: 10,
-        borderColor: Colors.primary,
-        
+        borderColor: Colors.primary,   
         borderWidth: 0.5,
         borderRadius: 7,
         maxWidth: '60%',
@@ -94,13 +93,9 @@ const Styles = StyleSheet.create({
         margin: 10,
         maxWidth: '30%',
         minWidth: '30%'
-
     },
     list:{
-        
-        height:'100%',
-       
-
+         height:'100%',
     }
 });
 
