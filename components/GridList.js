@@ -9,13 +9,13 @@ const GridList = props => {
             <MovieGridTile
                 title={itemData.item.Title}
                 Poster={itemData.item.Poster}
-                
+
                 onSelect={props.onSelect.bind(this, itemData)}
             />
         );
     };
 
-    return <FlatList
+    return <FlatList {...props.style}
         keyExtractor={(item, index) => item.id}
         data={props.listData}
         renderItem={renderGridItem}

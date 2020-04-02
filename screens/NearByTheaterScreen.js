@@ -8,11 +8,11 @@ import Colors from '../constants/color';
 //Rendering UI Component
 const NearByTheaterScreen = props => {
     const favMeal = MEALS.filter(meal => meal.id === 'm1' || meal.id === 'm2')
+    return <View style={Styles.list}>
+        <MealList  listData={favMeal} navigation={props.navigation} />
+    </View>
 
-    return     <MealList listData={favMeal} navigation={props.navigation} />
-    
 };
-
 
 NearByTheaterScreen.navigationOptions = (navdata) => {
     return {
@@ -20,12 +20,11 @@ NearByTheaterScreen.navigationOptions = (navdata) => {
     }
 };
 
-
-
 // Styling section
 const Styles = StyleSheet.create({
-    screen: {
-        backgroundColor: Colors.accent
+    list: {
+        backgroundColor: Colors.accent,
+        height:'100%'
     }
 });
 

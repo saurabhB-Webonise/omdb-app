@@ -43,7 +43,7 @@ const SearchScreen = props => {
         });
     };
 
-    return <View style={{ backgroundColor: Colors.accent }}>
+    return <View style={{ height:'100%', backgroundColor: Colors.accent }}>
         <View style={Styles.searchContainer}>
             <TextInput
                 style={Styles.searchbox}
@@ -53,7 +53,7 @@ const SearchScreen = props => {
             />
             <Text style={Styles.searchbutton} onPress={onSearchButtonClick}>Search</Text>
         </View>
-        <GridList listData={availableMovies} onSelect={onGridCellClick} />
+        <GridList  style={Styles.list} listData={availableMovies} onSelect={onGridCellClick} />
     </View>
 
 };
@@ -66,6 +66,7 @@ SearchScreen.navigationOptions = (navData) => {
 
 const Styles = StyleSheet.create({
     screen: {
+        flex:1
     },
     searchContainer: {
         flexDirection: 'row'
@@ -73,11 +74,14 @@ const Styles = StyleSheet.create({
     searchbox: {
         margin: 10,
         borderColor: Colors.primary,
-        padding: 10,
+        
         borderWidth: 0.5,
         borderRadius: 7,
         maxWidth: '60%',
-        minWidth: '60%'
+        minWidth: '60%',
+        maxHeight:50,
+        textAlignVertical:'center',
+        textAlign:'center'
     },
     searchbutton: {
         backgroundColor: Colors.primary,
@@ -90,6 +94,12 @@ const Styles = StyleSheet.create({
         margin: 10,
         maxWidth: '30%',
         minWidth: '30%'
+
+    },
+    list:{
+        
+        height:'100%',
+       
 
     }
 });
