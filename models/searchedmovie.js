@@ -7,7 +7,6 @@ class SearchedMovie {
         this.Type = Type;
         this.Poster = Poster;
     }
-
 }
 
 

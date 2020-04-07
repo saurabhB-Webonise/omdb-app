@@ -1,13 +1,6 @@
-import React, { useEffect } from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    ImageBackground
-} from 'react-native';
-
-
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { useSelector } from 'react-redux';
 import Colors from '../constants/color';
 
 
@@ -16,52 +9,29 @@ const DetailScreen = props => {
     const MovieList = useSelector(state => state.movies.availableSearchedMovie)
     const id = props.navigation.getParam('movieId');
     const moviess = MovieList.find(movie => movie.id === id)
-  return <View style={{ height: '100%', padding: 10, backgroundColor: Colors.accent }}>
-         <View style={styles.mealItem}>
-             <View>
-                 <View style={{ ...styles.mealRow, ...styles.mealHeader }}>
-                     <ImageBackground
-                         source={{ uri: moviess.Poster }}
-                         style={styles.bgImage}>
-                         <View style={styles.titleContainer}>
-                             <Text style={styles.title} numberOfLines={1}>
-                                 {moviess.Title}
-                             </Text>
-                         </View>
-                     </ImageBackground>
-                 </View>
-                 <View style={{ ...styles.mealRow, ...styles.mealDetail }}>
-                     <Text>Movie Name</Text>
-                     <Text>rating</Text>
-                 </View>
-             </View>
-         </View>
-     </View>
 
+    return <View style={{ height: '100%', padding: 10, backgroundColor: Colors.accent }}>
+        <View style={styles.mealItem}>
+            <View>
+                <View style={{ ...styles.mealRow, ...styles.mealHeader }}>
+                    <ImageBackground
+                        source={{ uri: moviess.Poster }}
+                        style={styles.bgImage}>
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.title} numberOfLines={1}>
+                                {moviess.Title}
+                            </Text>
+                        </View>
+                    </ImageBackground>
+                </View>
+                <View style={{ ...styles.mealRow, ...styles.mealDetail }}>
+                    <Text>Movie Name</Text>
+                    <Text>rating</Text>
+                </View>
+            </View>
+        </View>
+    </View>
 };
-
-
-
-
-
-// const GetMoviesFromApi = () => {
-
-//     fetch('http://www.omdbapi.com/?apikey=ea9dc777&t=' + movie.Title)
-//         .then((response) => response.json())
-//         .then((json) => {
-//             console.log(json)
-//             console.log("------------------------------start--------------------------------------")
-
-//             Jsonn = json
-//             return <ViewUI />
-
-//         }).catch((error) => {
-//             console.error(error);
-//         });
-// };
-
-
-
 
 const styles = StyleSheet.create({
     mealItem: {
@@ -72,7 +42,6 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         elevation: 0.5,
         marginRight: 10
-
     },
     bgImage: {
         width: '100%',
@@ -104,3 +73,19 @@ const styles = StyleSheet.create({
 });
 
 export default DetailScreen;
+
+
+
+
+
+//     const GetMoviesFromApi = () => {
+//     fetch('http://www.omdbapi.com/?apikey=ea9dc777&t=' + movie.Title)
+//         .then((response) => response.json())
+//         .then((json) => {
+//             console.log(json)
+//             Jsonn = json
+//             return <ViewUI />
+//         }).catch((error) => {
+//             console.error(error);
+//         });
+//      };

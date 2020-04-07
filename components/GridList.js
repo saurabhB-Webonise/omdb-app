@@ -9,7 +9,6 @@ const GridList = props => {
             <MovieGridTile
                 title={itemData.item.Title}
                 Poster={itemData.item.Poster}
-
                 onSelect={props.onSelect.bind(this, itemData)}
             />
         );
@@ -19,8 +18,7 @@ const GridList = props => {
         keyExtractor={(item, index) => item.id}
         data={props.listData}
         renderItem={renderGridItem}
-        numColumns={2}
-    />
+        numColumns={2}/>
 };
 
 export default GridList;

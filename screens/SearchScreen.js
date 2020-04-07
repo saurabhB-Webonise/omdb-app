@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { MOVIES_NAME } from '../data/dummy-data';
 import GridList from '../components/GridList';
 import { TextInput } from 'react-native-paper';
 import Colors from '../constants/color';
-
-
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchMovies } from '../store/actions/movies'
 
@@ -14,26 +11,15 @@ const SearchScreen = props => {
 
     const availableMovies = useSelector(state => state.movies.availableSearchedMovie)
     const dispatch = useDispatch();
-
-    function test() {
-        console.log("test function called")
-    }
-
     const [searchBoxData, setSearchBoxData] = useState('');
-
     const onSearchBoxDataChanged = inputText => {
         setSearchBoxData(inputText)
         console.log(inputText)
     };
-
-
     const onSearchButtonClick = () => {
-        // call dispatch method from here
-        console.log(searchBoxData)
         dispatch(fetchMovies(searchBoxData))
         setSearchBoxData('')
     };
-
     const onGridCellClick = itemData => {
         props.navigation.navigate({
             routeName: 'DetailScreen',
@@ -55,12 +41,11 @@ const SearchScreen = props => {
         </View>
         <GridList  style={Styles.list} listData={availableMovies} onSelect={onGridCellClick} />
     </View>
-
 };
 
 SearchScreen.navigationOptions = (navData) => {
     return {
-        headerTitle: 'Search Screen'
+        headerTitle: 'Omdb',
     }
 };
 
