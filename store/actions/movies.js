@@ -65,7 +65,7 @@ export const fetchNearByMoviewTheater = (lat, lng) => {
                 resdata.results[i].rating,
                 resdata.results[i].vicinity,
                 resdata.results[i].icon,
-                resdata.results[i].geometry.location.lat,                           
+                resdata.results[i].geometry.location.lat,           
                 resdata.results[i].geometry.location.lng)
             );
         }
