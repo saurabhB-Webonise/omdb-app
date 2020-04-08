@@ -16,9 +16,6 @@ const NearByTheaterScreen = props => {
     const [isFetching, setIsFetching] = useState(false);
     const [pickedLocation, setPickedLocation] = useState(null);
 
-    console.log("Inside near by screen  " + theaterList);
-
-
     const verifyPermissions = async () => {
         const result = await Permissions.askAsync(Permissions.LOCATION);
         if (result.status !== 'granted') {
@@ -39,8 +36,11 @@ const NearByTheaterScreen = props => {
             return;
         }
 
+
+        if (isFetching)
+            return
+
         try {
-            setIsFetching(true);
             const location = await Location.getCurrentPositionAsync({
                 timeout: 10000
             });
@@ -48,8 +48,9 @@ const NearByTheaterScreen = props => {
                 lat: location.coords.latitude,
                 lng: location.coords.longitude
             });
-
             console.log(pickedLocation)
+            setIsFetching(true);
+
         } catch (err) {
             Alert.alert(
                 'Could not fetch location!',
@@ -57,32 +58,30 @@ const NearByTheaterScreen = props => {
                 [{ text: 'Okay' }]
             );
         }
-        setIsFetching(false);
+        //setIsFetching(false);
     };
 
-
     const dispatch = useDispatch();
-
     var f = 'https://maps.googleapis.com/maps/api/place/photo?photoreference=CmRaAAAAaqH3c4BHdFHi7MGOdn-se7h41_IXN2DyDZHVsdIkM6MO2rXL18aGZ0QqvbCChHPoW0U00bJf3LYEmTrbHJAOWol0Mz57FjvqCrbpSGOJRetahQU4SURW3GH5YonriqAvEhCjeBQ0MVgMvj6NBsrg6cJGGhS4Rh8cg-bscVI5oBDbJ2AQhj8vXQ&sensor=false&maxheight=200&maxwidth=200&key=AIzaSyCJZ2riLHCzP9k49u1bn-2LSaqADGN9Xcs'
 
-    //  theaterList = [new NearByTheater('1', 'name', f, 'rating', 'vinicity', 'icon'),
-    //  new NearByTheater('1', 'name', f, 'rating', 'vinicity', 'icon'),
-    //  new NearByTheater('1', 'name', f, 'rating', 'vinicity', 'icon'),
-    //  new NearByTheater('1', 'name', f, 'rating', 'vinicity', 'icon'),
-    //  new NearByTheater('1', 'name', f, 'rating', 'vinicity', 'icon'),
-    //  new NearByTheater('1', 'name', f, 'rating', 'vinicity', 'icon'),
-    //  new NearByTheater('1', 'name', f, 'rating', 'vinicity', 'icon'),
-    //  new NearByTheater('1', 'name', f, 'rating', 'vinicity', 'icon')]
 
 
+    // theaterList = [new NearByTheater(1,
+    //     'name',
+    //     f,
+    //     '4',
+    //     'dummy', 'dummy', '18.5379422', '73.8356136')]
 
-
+    console.log("UI Render");
+  getLocationHandler()
+    console.log("[>>>]-------[<>]-[<>]-[<>]-[<>]-[]--------[]");
 
     useEffect(() => {
-        getLocationHandler()
-        if(pickedLocation!==null)
-        dispatch(movieActions.fetchNearByMoviewTheater(pickedLocation.lat, pickedLocation.lng));
-    }, [dispatch]);
+         if (pickedLocation !== null)
+          dispatch(movieActions.fetchNearByMoviewTheater(pickedLocation.lat, pickedLocation.lng));
+    }, [pickedLocation]);
+
+
 
     const Items = itemData => {
         return <MovieTheaterItem
@@ -90,18 +89,15 @@ const NearByTheaterScreen = props => {
             imageUri={itemData.item.photo_reference}
             icon={itemData.item.icon}
             rating={itemData.item.rating}
-            vicinity={itemData.item.vicinity} />
+            vicinity={itemData.item.vicinity}
+            lat={itemData.item.lat}
+            lng={itemData.item.lng} />
     }
 
-
-
-
     //console.log("-------->" + theaterList.length);
-
     //const favMeal = MEALS.filter(meal => meal.id === 'm1' || meal.id === 'm2')
     return <View style={Styles.mainContainer}>
         <View style={Styles.listContainer}>
-
             <FlatList
                 horizontal={false}
                 data={theaterList}

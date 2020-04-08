@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import *  as Font from 'expo-font';
 import { AppLoading } from 'expo';
-import OmdbNavigator from './navigation/OmdbNavigator'
+import OmdbNavigator from './navigation/OmdbNavigator';
+import SplashScreen from './screens/SplashScreen';
 
 
 
@@ -10,6 +11,7 @@ import { enableScreens } from 'react-native-screens';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
+
 
 enableScreens();
 const rootReducer = combineReducers({
@@ -29,7 +31,7 @@ export default function App() {
   if (!fontLoaded) {
     return <AppLoading
       startAsync={fetchFonts}
-      onFinish={()=>setFontLoaded(true)} />
+      onFinish={() => setFontLoaded(true)} />
   }
   return <Provider store={store}>
     <OmdbNavigator />

@@ -1,12 +1,9 @@
-import { SEARCHED_MOVIE_LIST, SELECTED_MOVIE, NEAR_BY_MOVIEW_THEATER } from '../actions/movies'
+import { SEARCHED_MOVIE_LIST, SELECTED_MOVIE, NEAR_BY_MOVIEW_THEATER } from '../actions/movies';
 
 
 const initalState = {
+    sel: [],
     availableSearchedMovie: [],
-    selectedMovie: {
-        Title: '',
-        Poster: ''
-    },
     nearByMoviewTheaters: []
 };
 
@@ -19,8 +16,8 @@ const movieReducer = (state = initalState, action) => {
             };
         case SELECTED_MOVIE:
             return {
-                selectedMovie: action.selected_movie
-            }
+                sele: action.selected_movie
+            };
 
         case NEAR_BY_MOVIEW_THEATER:
             return {

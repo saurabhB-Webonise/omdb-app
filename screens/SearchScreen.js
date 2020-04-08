@@ -10,6 +10,7 @@ import { fetchMovies } from '../store/actions/movies'
 const SearchScreen = props => {
 
     const availableMovies = useSelector(state => state.movies.availableSearchedMovie)
+
     const dispatch = useDispatch();
     const [searchBoxData, setSearchBoxData] = useState('');
     const onSearchBoxDataChanged = inputText => {

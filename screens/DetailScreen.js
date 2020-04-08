@@ -1,25 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../constants/color';
+
+import * as movieActions from '../store/actions/movies';
 
 
 const DetailScreen = props => {
 
-    const MovieList = useSelector(state => state.movies.availableSearchedMovie)
     const id = props.navigation.getParam('movieId');
-    const moviess = MovieList.find(movie => movie.id === id)
 
-    return <View style={{ height: '100%', padding: 10, backgroundColor: Colors.accent }}>
+    const d = useSelector(state => state.movies.sel);
+
+    console.log(d);
+
+    const availableMovies = useSelector(state => state.movies.availableSearchedMovie)
+    const movies = availableMovies.find(movie => movie.id === id);
+    console.log(movies.Title)
+    return (<View style={{ height: '100%', padding: 10, backgroundColor: Colors.accent }}>
         <View style={styles.mealItem}>
             <View>
                 <View style={{ ...styles.mealRow, ...styles.mealHeader }}>
                     <ImageBackground
-                        source={{ uri: moviess.Poster }}
+                        source={{ uri: movies.Poster }}
                         style={styles.bgImage}>
                         <View style={styles.titleContainer}>
                             <Text style={styles.title} numberOfLines={1}>
-                                {moviess.Title}
+                                {movies.Title}
                             </Text>
                         </View>
                     </ImageBackground>
@@ -30,7 +37,7 @@ const DetailScreen = props => {
                 </View>
             </View>
         </View>
-    </View>
+    </View>)
 };
 
 const styles = StyleSheet.create({
@@ -76,16 +83,3 @@ export default DetailScreen;
 
 
 
-
-
-//     const GetMoviesFromApi = () => {
-//     fetch('http://www.omdbapi.com/?apikey=ea9dc777&t=' + movie.Title)
-//         .then((response) => response.json())
-//         .then((json) => {
-//             console.log(json)
-//             Jsonn = json
-//             return <ViewUI />
-//         }).catch((error) => {
-//             console.error(error);
-//         });
-//      };
