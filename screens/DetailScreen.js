@@ -57,6 +57,10 @@ const styles = StyleSheet.create({
         elevation: 0.5,
         marginRight: 10
     },
+
+
+
+    
     bgImage: {
         width: '100%',
         height: '100%',
