@@ -6,7 +6,10 @@ import Movie2 from '../../models/movie2';
 export const SEARCHED_MOVIE_LIST = 'SEARCHED_MOVIE_LIST';
 export const SELECTED_MOVIE = 'SELECTED_MOVIE';
 export const NEAR_BY_MOVIEW_THEATER = 'NEAR_BY_MOVIEW_THEATER';
-export const selectedMovies = () => {
+export const TEST = 'TEST';
+
+
+export const fetchSelectedMovies = () => {
     return async dispatch => {
         const response = await fetch('http://www.omdbapi.com/?apikey=ea9dc777&t=Scooby-Doo! and WWE: Curse of the Speed Demon');
         const resData = await response.json();
@@ -65,10 +68,12 @@ export const fetchNearByMoviewTheater = (lat, lng) => {
                 resdata.results[i].rating,
                 resdata.results[i].vicinity,
                 resdata.results[i].icon,
-                resdata.results[i].geometry.location.lat,           
+                resdata.results[i].geometry.location.lat,
                 resdata.results[i].geometry.location.lng)
             );
         }
         dispatch({ type: NEAR_BY_MOVIEW_THEATER, near_by_movie_theater: nearByMovieTheater });
     };
 };
+
+

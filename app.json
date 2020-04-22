@@ -3,7 +3,6 @@
     "name": "Blank Template",
     "slug": "omdb-app",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "platforms": [
       "ios",
       "android",
@@ -27,7 +26,12 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.example.omdb"
+      "package": "com.example.omdb",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCJZ2riLHCzP9k49u1bn-2LSaqADGN9Xcs"
+        }
+      }
     }
   }
 }

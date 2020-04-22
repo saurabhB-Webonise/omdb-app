@@ -15,6 +15,7 @@ import Colors from '../constants/color';
 import { Ionicons } from '@expo/vector-icons'
 import { Platform } from 'react-native';
 
+import Map from '../screens/map';
 
 
 
@@ -57,7 +58,7 @@ var tabScreenConfig = {
             tabBarIcon: (tabInfo) => {
                 return <Ionicons name='md-tv' size={25} color={tabInfo.tintColor} />
             },
-            tabBarColor: Colors.accent
+            tabBarColor: Colors.primary
         }
     }
 };
@@ -66,6 +67,7 @@ const createMaterialBottomTabNavigatorCode = createMaterialBottomTabNavigator(
     tabScreenConfig, {
     activeTintColor: Colors.primary,
     shifting: true,
+  
 });
 
 const createBottomTabNavigatorCode = createBottomTabNavigator(

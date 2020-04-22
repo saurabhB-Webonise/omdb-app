@@ -7,12 +7,20 @@ import NearByTheater from '../models/nearByTheater';
 import MovieTheaterItem from '../components/MovieTheaterItem';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
+import { NavigationEvents } from "react-navigation";
+
 
 
 //Rendering UI Component
 const NearByTheaterScreen = props => {
 
+
+
+    const dispatch = useDispatch();
+
+    console.log('\n');
     var theaterList = useSelector(state => state.movies.nearByMoviewTheaters);
+
     const [isFetching, setIsFetching] = useState(false);
     const [pickedLocation, setPickedLocation] = useState(null);
 
@@ -29,27 +37,21 @@ const NearByTheaterScreen = props => {
         return true;
     };
 
-
     const getLocationHandler = async () => {
+
         const hasPermission = await verifyPermissions();
+
         if (!hasPermission) {
             return;
         }
 
 
-        if (isFetching)
-            return
-
         try {
             const location = await Location.getCurrentPositionAsync({
                 timeout: 10000
             });
-            setPickedLocation({
-                lat: location.coords.latitude,
-                lng: location.coords.longitude
-            });
-            console.log(pickedLocation)
-            setIsFetching(true);
+            console.log("---------------------")
+            dispatch(movieActions.fetchNearByMoviewTheater(location.coords.latitude, location.coords.longitude));
 
         } catch (err) {
             Alert.alert(
@@ -58,30 +60,15 @@ const NearByTheaterScreen = props => {
                 [{ text: 'Okay' }]
             );
         }
-        //setIsFetching(false);
     };
 
-    const dispatch = useDispatch();
-    var f = 'https://maps.googleapis.com/maps/api/place/photo?photoreference=CmRaAAAAaqH3c4BHdFHi7MGOdn-se7h41_IXN2DyDZHVsdIkM6MO2rXL18aGZ0QqvbCChHPoW0U00bJf3LYEmTrbHJAOWol0Mz57FjvqCrbpSGOJRetahQU4SURW3GH5YonriqAvEhCjeBQ0MVgMvj6NBsrg6cJGGhS4Rh8cg-bscVI5oBDbJ2AQhj8vXQ&sensor=false&maxheight=200&maxwidth=200&key=AIzaSyCJZ2riLHCzP9k49u1bn-2LSaqADGN9Xcs'
-
-
-
-    // theaterList = [new NearByTheater(1,
-    //     'name',
-    //     f,
-    //     '4',
-    //     'dummy', 'dummy', '18.5379422', '73.8356136')]
-
     console.log("UI Render");
-  getLocationHandler()
     console.log("[>>>]-------[<>]-[<>]-[<>]-[<>]-[]--------[]");
-
     useEffect(() => {
-         if (pickedLocation !== null)
-          dispatch(movieActions.fetchNearByMoviewTheater(pickedLocation.lat, pickedLocation.lng));
-    }, [pickedLocation]);
 
+        // getLocationHandler()
 
+    }, [])
 
     const Items = itemData => {
         return <MovieTheaterItem
@@ -94,14 +81,19 @@ const NearByTheaterScreen = props => {
             lng={itemData.item.lng} />
     }
 
-    //console.log("-------->" + theaterList.length);
-    //const favMeal = MEALS.filter(meal => meal.id === 'm1' || meal.id === 'm2')
     return <View style={Styles.mainContainer}>
         <View style={Styles.listContainer}>
             <FlatList
                 horizontal={false}
                 data={theaterList}
                 renderItem={Items} />
+            <NavigationEvents
+                onDidFocus={payload => {
+                    console.log("will focus", payload);
+                    getLocationHandler()
+                }}
+            />
+
         </View>
     </View>
 };

@@ -8,14 +8,21 @@ import * as movieActions from '../store/actions/movies';
 
 const DetailScreen = props => {
 
+
+
+    console.log("Detail screen");
+
     const id = props.navigation.getParam('movieId');
 
-    const d = useSelector(state => state.movies.sel);
-
-    console.log(d);
-
+    console.log(id)
     const availableMovies = useSelector(state => state.movies.availableSearchedMovie)
+
+    if (availableMovies === undefined)
+        return null
     const movies = availableMovies.find(movie => movie.id === id);
+
+
+   
     console.log(movies.Title)
     return (<View style={{ height: '100%', padding: 10, backgroundColor: Colors.accent }}>
         <View style={styles.mealItem}>
