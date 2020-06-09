@@ -2,7 +2,7 @@ import { SEARCHED_MOVIE_LIST, SELECTED_MOVIE, NEAR_BY_MOVIEW_THEATER, TEST } fro
 
 
 const initalState = {
-    sel: [],
+    sele: [],
     availableSearchedMovie: [],
     nearByMoviewTheaters: [],
     test: []

@@ -9,8 +9,7 @@ const GridList = props => {
             <MovieGridTile
                 title={itemData.item.Title}
                 Poster={itemData.item.Poster}
-                onSelect={props.onSelect.bind(this, itemData)}
-            />
+                onSelect={props.onSelect.bind(this, itemData)}/>
         );
     };
 

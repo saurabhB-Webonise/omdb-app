@@ -10,6 +10,10 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import DummyScreen from './screens/DummyScreen';
+import SwitchNav from './navigation/SwitchNav';
+import store2 from './store2/reducer/index';
+
+import PDF from './screens/PDF';
 
 enableScreens();
 
@@ -22,13 +26,6 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
-
-
-
-// Enable persistence
-//persistStore(store)
-
-
 const fetchFonts = () => {
   return Font.loadAsync({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
@@ -37,16 +34,23 @@ const fetchFonts = () => {
 };
 
 export default function App() {
-  const [fontLoaded, setFontLoaded] = useState(false)
-  if (!fontLoaded) {
-    return <AppLoading
-      startAsync={fetchFonts}
-      onFinish={() => setFontLoaded(true)} />
-  }
-  return <Provider store={store}>
-    <OmdbNavigator />
-  </Provider>;
+
+  // const [fontLoaded, setFontLoaded] = useState(false)
+
+  // if (!fontLoaded) {
+  //   return <AppLoading
+  //     startAsync={fetchFonts}
+  //     onFinish={() => setFontLoaded(true)} />
+  // }
+  // return <Provider store={store}>
+  //   <OmdbNavigator />
+  // </Provider>;
+
+  return <PDF />
+
+  // return <Provider store={store2}>
+  //   <SwitchNav />
+  // </Provider>
 
 
-  //  return <DummyScreen />
 }
